@@ -1,10 +1,10 @@
-# simple_demo
+# Simple weather app
 
-A new Flutter project.
+A weather app using the weather.gov Restful APIs.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a simple weather app using weather.gov APIs.
 
 A few resources to get you started if this is your first Flutter project:
 
