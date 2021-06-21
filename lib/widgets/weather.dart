@@ -46,7 +46,7 @@ class Weather extends StatelessWidget {
               DataCell(Text(weather.state))
             ]),
             DataRow(cells: [
-              DataCell(Text('Short Forecast')),
+              DataCell(Image.network(weather.icon)),
               DataCell(Text(weather.shortForecast))
             ]),
           ],

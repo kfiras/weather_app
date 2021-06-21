@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WeatherHomePage(title: 'Weather Home Page'),
+      home: WeatherHomePage(title: 'My Weather'),
     );
   }
 }

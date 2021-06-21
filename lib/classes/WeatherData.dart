@@ -10,9 +10,12 @@ class WeatherData {
   double elevation = 0;
   String city = '';
   String state = '';
+  String icon = '';
 
   WeatherData(String name, int temperature, String temperatureUnit,
-              String windSpeed, String windDirection, String shortForecast, double elevation, String city, String state) {
+              String windSpeed, String windDirection,
+              String shortForecast, double elevation,
+              String city, String state, String icon) {
     this.name = name;
     this.temperature = temperature;
     this.temperatureUnit = temperatureUnit;
@@ -22,6 +25,7 @@ class WeatherData {
     this.elevation = elevation;
     this.city = city;
     this.state = state;
+    this.icon = icon;
   }
 
   factory WeatherData.fromJsonWeatherData(Map<String, dynamic> json) {
@@ -35,6 +39,7 @@ class WeatherData {
       json['properties']['elevation']['value'],
       '',
       '',
+      json['properties']['periods'][0]['icon'],
     );
   }
 }
