@@ -10,6 +10,8 @@
 
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>This app needs access to location when open and in the background.</string>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-4716393954055458~4493045408</string>
 
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

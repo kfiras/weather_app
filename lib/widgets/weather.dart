@@ -3,7 +3,24 @@ import 'package:simple_demo/classes/WeatherData.dart';
 import 'package:simple_demo/services/weatherService.dart';
 class Weather extends StatelessWidget {
   const Weather({Key? key}) : super(key: key);
-
+  String buildTemperature(int temp, String unit) {
+    if(temp == -1) {
+      return 'na';
+    }
+    return temp.toString() + ' ' + unit;
+  }
+  String buildElevation(double elevation) {
+    if(elevation == -1) {
+      return 'na';
+    }
+    return elevation.toString() + ' meters';
+  }
+  Image buildIcon(String imageUrl) {
+    if(imageUrl == 'na') {
+       return Image.asset('assets/images/weather.png');
+    }
+    return Image.network(imageUrl);
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -23,7 +40,7 @@ class Weather extends StatelessWidget {
             ]),
             DataRow(cells: [
               DataCell(Text('Temperature')),
-              DataCell(Text(weather.temperature.toString() + ' ' + weather.temperatureUnit))
+              DataCell(Text(buildTemperature(weather.temperature,weather.temperatureUnit))),
             ]),
             DataRow(cells: [
               DataCell(Text('Wind Speed')),
@@ -35,7 +52,7 @@ class Weather extends StatelessWidget {
             ]),
             DataRow(cells: [
               DataCell(Text('Elevation')),
-              DataCell(Text(weather.elevation.toString() + ' meters'))
+              DataCell(Text(buildElevation(weather.elevation))),
             ]),
             DataRow(cells: [
               DataCell(Text('City')),
@@ -46,7 +63,7 @@ class Weather extends StatelessWidget {
               DataCell(Text(weather.state))
             ]),
             DataRow(cells: [
-              DataCell(Image.network(weather.icon)),
+              DataCell(buildIcon(weather.icon)),
               DataCell(Text(weather.shortForecast))
             ]),
           ],
