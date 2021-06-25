@@ -1,6 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:simple_demo/classes/WeatherData.dart';
-import 'package:simple_demo/services/weatherService.dart';
+import 'package:weather_app/classes/WeatherData.dart';
+import 'package:weather_app/services/weatherService.dart';
+
+extension Round on double {
+  double roundToPrecision(int n) {
+    num fac = pow(10, n);
+    return (this * fac).round() / fac;
+  }
+}
+
 class Weather extends StatelessWidget {
   const Weather({Key? key}) : super(key: key);
   String buildTemperature(int temp, String unit) {
@@ -13,7 +23,7 @@ class Weather extends StatelessWidget {
     if(elevation == -1) {
       return 'na';
     }
-    return elevation.toString() + ' meters';
+    return elevation.roundToPrecision(2).toString() + ' meters';
   }
   Image buildIcon(String imageUrl) {
     if(imageUrl == 'na') {

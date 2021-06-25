@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:simple_demo/classes/WeatherData.dart';
-import 'package:simple_demo/classes/WeatherGrid.dart';
+import 'package:weather_app/classes/WeatherData.dart';
+import 'package:weather_app/classes/WeatherGrid.dart';
 import 'geolocator.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,7 +33,6 @@ class WeatherService {
     if(response.statusCode != 200) {
      return WeatherData('na', -1, 'na', 'na', 'na', 'na', -1,'na', 'na', 'na');
     }
-    print('https://api.weather.gov/gridpoints/' + buildGridQueryString(grid));
     var weather = WeatherData.fromJsonWeatherData(jsonDecode(response.body));
     weather.city = grid.city;
     weather.state = grid.state;

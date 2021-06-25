@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_demo/widgets/weather.dart';
+import 'package:weather_app/widgets/weather.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:weather_app/classes/AdHelper.dart';
 
 class WeatherHomePage extends StatefulWidget {
   WeatherHomePage({Key? key, required this.title}) : super(key: key);
@@ -13,6 +15,11 @@ class WeatherHomePage extends StatefulWidget {
 
 class _WeatherHomePageState extends State<WeatherHomePage> {
 
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +30,8 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
       ),
       body: SafeArea(
         child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
