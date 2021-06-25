@@ -26,6 +26,13 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   }
 
   @override
+  void dispose() {
+    // TODO: Dispose a BannerAd object
+    _bannerAd.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     // TODO: Initialize _bannerAd
