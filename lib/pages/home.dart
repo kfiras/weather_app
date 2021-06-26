@@ -57,6 +57,40 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
     _bannerAd.load();
   }
 
+  // TODO: Add _interstitialAd
+  InterstitialAd? _interstitialAd;
+
+  // TODO: Add _isInterstitialAdReady
+  bool _isInterstitialAdReady = false;
+
+  // TODO: Implement _loadInterstitialAd()
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          this._interstitialAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              print('Exiting Ad..');
+            },
+          );
+
+          _isInterstitialAdReady = true;
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+          _isInterstitialAdReady = false;
+        },
+      ),
+    );
+  }
+  void _loadIntAd() {
+    // TODO: Load an Interstitial Ad
+      _loadInterstitialAd();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,9 +119,17 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
             Image.asset(
               'assets/images/weather.png',
               width: 120,
-              height: 200,
+              height: 150,
             ),
             Weather(),
+            /*
+            FloatingActionButton.extended(
+              onPressed: _loadIntAd,
+              tooltip: 'Load Interstitial Ad',
+              icon: Icon(Icons.add),
+              label: Text('Load Ad'),
+            ), // This trailing comma makes auto-formatting nicer for build methods.
+            */
             // TODO: Display a banner when ready
             if (_isBannerAdReady)
               Align(
