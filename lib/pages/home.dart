@@ -55,6 +55,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
       ),
     );
     _bannerAd.load();
+    //Flash the interstitial ad at startup
     helper.flashInterstitialAd();
   }
 
