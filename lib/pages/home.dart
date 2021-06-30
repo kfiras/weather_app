@@ -20,6 +20,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   // TODO: Add _isBannerAdReady
   bool _isBannerAdReady = false;
 
+  AdHelper helper = new AdHelper();
   Future<InitializationStatus> _initGoogleMobileAds() {
     // TODO: Initialize Google Mobile Ads SDK
     return MobileAds.instance.initialize();
@@ -53,44 +54,9 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
         },
       ),
     );
-
     _bannerAd.load();
   }
 
-  // TODO: Add _interstitialAd
-  InterstitialAd? _interstitialAd;
-
-  // TODO: Add _isInterstitialAdReady
-  bool _isInterstitialAdReady = false;
-
-  // TODO: Implement _loadInterstitialAd()
-  void _loadInterstitialAd() {
-    InterstitialAd.load(
-      adUnitId: AdHelper.interstitialAdUnitId,
-      request: AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) {
-          this._interstitialAd = ad;
-
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              print('Exiting Ad..');
-            },
-          );
-
-          _isInterstitialAdReady = true;
-        },
-        onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
-          _isInterstitialAdReady = false;
-        },
-      ),
-    );
-  }
-  void _loadIntAd() {
-    // TODO: Load an Interstitial Ad
-      _loadInterstitialAd();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +64,15 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        leading: GestureDetector(
+          onTap: () {
+            helper.loadInterstitialAd();
+            helper.showInterstitialAd();
+          },
+          child: Icon(
+            Icons.menu,
+          ),
+        )
       ),
       body: SafeArea(
           child: Container(
