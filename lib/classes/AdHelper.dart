@@ -6,6 +6,30 @@ class AdHelper {
   InterstitialAd? _interstitialAd;
   bool _isInterstitialAdReady = false;
 
+  void flashInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          this._interstitialAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              print('Exiting Ad..');
+            },
+          );
+
+          _isInterstitialAdReady = true;
+          _interstitialAd!.show();
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+          _isInterstitialAdReady = false;
+        },
+      ),
+    );
+  }
   void loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: AdHelper.interstitialAdUnitId,
@@ -29,8 +53,9 @@ class AdHelper {
       ),
     );
   }
-  void showInterstitialAd() {
+  showInterstitialAd() {
     if(_interstitialAd == null) {
+      print('Interstitial ad is null');
       return;
     }
     _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
@@ -50,6 +75,7 @@ class AdHelper {
     _interstitialAd!.show();
     _interstitialAd = null;
   }
+
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3940256099942544/6300978111';
